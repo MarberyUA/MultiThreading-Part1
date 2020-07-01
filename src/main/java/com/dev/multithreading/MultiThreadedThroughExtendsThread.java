@@ -1,11 +1,12 @@
 package com.dev.multithreading;
 
-import org.apache.log4j.Logger;
 import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class MultiThreadedThroughExtendsThread extends Thread {
-    private static final Logger LOGGER = LogManager.getLogger(MultiThreadedThroughExtendsThread.class);
-    private Thread t;
+    private static final Logger LOGGER = LogManager
+            .getLogger(MultiThreadedThroughExtendsThread.class);
+    private Thread thread;
     private String threadName;
 
     public MultiThreadedThroughExtendsThread(String name) {
@@ -15,7 +16,7 @@ public class MultiThreadedThroughExtendsThread extends Thread {
 
     @Override
     public void run() {
-        LOGGER.info("Running " +  threadName);
+        LOGGER.info("Running " + threadName);
         for (int i = 0; i < 100; i++) {
             LOGGER.info("Thread-" + threadName + " value=" + i);
         }
@@ -23,9 +24,9 @@ public class MultiThreadedThroughExtendsThread extends Thread {
 
     @Override
     public void start() {
-        if (t == null) {
-            t = new Thread(this, threadName);
-            t.start();
+        if (thread == null) {
+            thread = new Thread(this, threadName);
+            thread.start();
         }
     }
 }
