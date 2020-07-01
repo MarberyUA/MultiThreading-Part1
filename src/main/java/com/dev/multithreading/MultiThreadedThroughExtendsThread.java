@@ -8,17 +8,20 @@ public class MultiThreadedThroughExtendsThread extends Thread {
             .getLogger(MultiThreadedThroughExtendsThread.class);
     private Thread thread;
     private String threadName;
+    private Counter incrementedObject;
 
-    public MultiThreadedThroughExtendsThread(String name) {
+    public MultiThreadedThroughExtendsThread(String name, Counter object) {
         threadName = name;
+        incrementedObject = object;
         LOGGER.info("Creating " + threadName);
     }
 
     @Override
     public void run() {
         LOGGER.info("Running " + threadName);
-        for (int i = 0; i < 100; i++) {
-            LOGGER.info("Thread-" + threadName + " value=" + i);
+        while (incrementedObject.getCount() != 100) {
+            incrementedObject.increment();
+            LOGGER.info("Thread-" + threadName + " value " + incrementedObject.getCount());
         }
     }
 
